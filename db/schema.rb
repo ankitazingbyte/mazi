@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 20180221124210) do
     t.string "name"
     t.float "price"
     t.string "description"
-    t.integer "promocode_id"
     t.integer "category_id"
     t.integer "subcategory_id"
     t.datetime "created_at", null: false

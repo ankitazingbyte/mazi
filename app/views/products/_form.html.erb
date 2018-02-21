@@ -42,14 +42,14 @@
                                                 <div class="form-group">
                                                     <label class="control-label">Category</label>
                                                     <div class="input-group">
-                                                    <%= form.select :category_id, Category.all.map{|c| [c.name, c.id]}, class: "form-control", id: "mainCatCombo", onchange: "ShowHideSubCat ()" %>
+                                                    <%= form.select :category_id, Category.all.map{|c| [c.name, c.id]}, class: "form-control" %>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="control-label">SubCategory</label>
-                                                     <%= form.select :subcategory_id, Subcategory.all.map{|s| [s.name, s.id]}, class: "form-control", id: "subCatCombo"%>
+                                                     <%= form.select :subcategory_id, Subcategory.all.map{|s| [s.name, s.id]}, class: "form-control"%>
                                                     </div>
                                                 </div>
                                             </div>
@@ -113,25 +113,38 @@
 </div>
 <!-- /#page-wrapper -->
 <script>
-      function readURL(input) {
-        if (input.files && input.files[0]) {
-          var reader = new FileReader();
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
 
-          reader.onload = function (e) {
-            $('#img_prev')
-              .attr('src', e.target.result)
-              .width(150)
-              .height(200);
-          };
+      reader.onload = function (e) {
+        $('#img_prev')
+          .attr('src', e.target.result)
+          .width(150)
+          .height(200);
+      };
 
-          reader.readAsDataURL(input.files[0]);
-        }
-      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+    // function ShowHideSubCat () {
+    //     var Category = document.getElementById ("mainCatCombo");
+    //     var SubCategory = document.getElementById ("subCatCombo");
+    //     Subategory.style.display = (Category.value == 'cat2') ? '' : 'none';
+    // }
+    $(document).on('change', '#product_category_id',function(){
+        $.ajax({
+          url: 'get_sub_categories',
+          type: 'GET',
+          data: { category_id: $("#product_category_id option:selected").val()},
+          success: function(data){
+            subcat = $("#product_subcategory_id").empty()
+            $.each(data, function(k, v){
+                var option = "<option>"+v['name']+"</option>"
+                subcat.append(option);
+            });
+          }
+        })
+    })
 </script>
-<script>
-        function ShowHideSubCat () {
-            var Category = document.getElementById ("mainCatCombo");
-            var SubCategory = document.getElementById ("subCatCombo");
-            Subategory.style.display = (Category.value == 'cat2') ? '' : 'none';
-        }
-    </script>

@@ -62,6 +62,14 @@ class ProductsController < ApplicationController
     end
   end
 
+  def get_sub_categories
+    @cats = Subcategory.where(category_id: params[:category_id])
+    render json:  @cats
+    # respond_to do |format|
+    #   format.js { @cats }
+    # end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product

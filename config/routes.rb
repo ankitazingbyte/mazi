@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   resources :promocodes
   resources :subcategories
   resources :categories
-  resources :products
+  resources :products do
+  	get "get_sub_categories", on: :collection
+
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get 'home/index'
   root 'home#index'
