@@ -1,0 +1,62 @@
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Add New Category</h4> 
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading"> Add Category</div>
+                    <div class="panel-wrapper collapse in" aria-expanded="true">
+                        <div class="panel-body">
+                            <%= form_for @subcategory do |form| %>
+                                <div class="form-body">
+                                    <h3 class="box-title">About Category</h3>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Select Category</label>
+                                                <div class="input-group">  
+                                                    <%= form.select :category_id, Category.all.map{|c| [c.name, c.id]}%>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/span -->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                               <label class="control-label">Sub Category Name</label>
+                                                <div class="input-group">
+                                                    <%= form.text_field :name, class: "form-control" %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Select Section</label>  
+                                                <div class="input-group">
+                                                     <%= form.select :section_id, Section.all.map{|s| [s.name, s.id]}, class: "form-control" %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr> 
+                                </div>
+                                <div class="form-actions m-t-40">
+                                    <%= form.submit "Save", class: "btn btn-success" %>
+                                    <%= link_to "Cancel", products_path, class: "btn btn-default" %>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

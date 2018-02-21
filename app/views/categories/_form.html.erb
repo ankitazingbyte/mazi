@@ -1,0 +1,85 @@
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Add New Category</h4></div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading"> Add Category</div>
+                    <div class="panel-wrapper collapse in" aria-expanded="true">
+                        <div class="panel-body">
+                            <%= form_for @category do |form| %>
+                                <div class="form-body">
+                                    <h3 class="box-title">About Category</h3>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                              <label class="control-label">Category Name</label>
+                                                <div class="input-group">
+                                                    <%= form.text_field :name, class: "form-control" %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                              <label class="control-label">Select Section</label>
+                                                <div class="input-group">
+                                                    <%= form.select :section_id, Section.all.map{|s| [s.name, s.id]}, class: "form-control" %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/row-->
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h3 class="box-title m-t-20">Upload Image</h3>
+                                            <img id="img_prev" src="#" alt="" />
+                                            <div class="product-img">
+                                                <%= form.file_field :image, onchange: "readURL(this);" %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                              <label class="control-label">subcategory</label>
+                                                <%#= form.select :subcategory_id, Subcategory.all.map{|s| [s.name, s.id]}%>
+                                            </div>
+                                        </div>
+                                    </div> -->   
+                                    <hr> 
+                                </div>
+                                <div class="form-actions m-t-40">
+                                    <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+                                    <button type="button" class="btn btn-default">Cancel</button>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--row -->
+    </div>
+</div>
+<script>
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            $('#img_prev')
+              .attr('src', e.target.result)
+              .width(150)
+              .height(200);
+          };
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+</script>
